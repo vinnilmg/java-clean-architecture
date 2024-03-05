@@ -1,5 +1,6 @@
 package com.vinnilmg.cleanarchitecture.entrypoint.controller;
 
+import com.vinnilmg.cleanarchitecture.core.usecase.DeleteCustomerByIdUseCase;
 import com.vinnilmg.cleanarchitecture.core.usecase.FindCustomerByIdUseCase;
 import com.vinnilmg.cleanarchitecture.core.usecase.InsertCustomerUseCase;
 import com.vinnilmg.cleanarchitecture.core.usecase.UpdateCustomerUseCase;
@@ -16,6 +17,8 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
+    private static final String PATH_PARAM_ID = "/{id}";
+
     @Autowired
     private InsertCustomerUseCase insertCustomerUseCase;
 
@@ -24,6 +27,9 @@ public class CustomerController {
 
     @Autowired
     private UpdateCustomerUseCase updateCustomerUseCase;
+
+    @Autowired
+    private DeleteCustomerByIdUseCase deleteCustomerByIdUseCase;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -35,14 +41,14 @@ public class CustomerController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(PATH_PARAM_ID)
     public ResponseEntity<CustomerResponse> findById(@PathVariable final String id) {
         var customer = findCustomerByIdUseCase.find(id);
         var customerResponse = customerMapper.toCustomerResponse(customer);
         return ResponseEntity.ok().body(customerResponse);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(PATH_PARAM_ID)
     public ResponseEntity<Void> update(@PathVariable final String id, @Valid @RequestBody CustomerRequest customerRequest) {
         var customer = customerMapper.toCustomer(customerRequest);
 
@@ -50,6 +56,12 @@ public class CustomerController {
         customer.setId(id);
 
         updateCustomerUseCase.update(customer, customerRequest.getZipCode());
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(PATH_PARAM_ID)
+    public ResponseEntity<Void> delete(@PathVariable final String id) {
+        deleteCustomerByIdUseCase.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
