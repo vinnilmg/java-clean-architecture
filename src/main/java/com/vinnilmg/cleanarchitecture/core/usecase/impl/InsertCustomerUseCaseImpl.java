@@ -2,6 +2,7 @@ package com.vinnilmg.cleanarchitecture.core.usecase.impl;
 
 import com.vinnilmg.cleanarchitecture.core.dataprovider.FindAddressByZipCode;
 import com.vinnilmg.cleanarchitecture.core.dataprovider.InsertCustomer;
+import com.vinnilmg.cleanarchitecture.core.dataprovider.SendCpfForValidation;
 import com.vinnilmg.cleanarchitecture.core.domain.Customer;
 import com.vinnilmg.cleanarchitecture.core.usecase.InsertCustomerUseCase;
 
@@ -9,13 +10,16 @@ public class InsertCustomerUseCaseImpl implements InsertCustomerUseCase {
 
     private final FindAddressByZipCode findAddressByZipCode;
     private final InsertCustomer insertCustomer;
+    private final SendCpfForValidation sendCpfForValidation;
 
     public InsertCustomerUseCaseImpl(
             FindAddressByZipCode findAddressByZipCode,
-            InsertCustomer insertCustomer
+            InsertCustomer insertCustomer,
+            SendCpfForValidation sendCpfForValidation
     ) {
         this.findAddressByZipCode = findAddressByZipCode;
         this.insertCustomer = insertCustomer;
+        this.sendCpfForValidation = sendCpfForValidation;
     }
 
     @Override
@@ -23,5 +27,6 @@ public class InsertCustomerUseCaseImpl implements InsertCustomerUseCase {
         var address = findAddressByZipCode.find(zipCode);
         customer.setAddress(address);
         insertCustomer.insert(customer);
+        sendCpfForValidation.send(customer.getCpf());
     }
 }
