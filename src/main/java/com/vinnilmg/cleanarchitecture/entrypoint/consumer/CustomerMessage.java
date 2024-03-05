@@ -1,4 +1,4 @@
-package com.vinnilmg.cleanarchitecture.entrypoint.consumer.message;
+package com.vinnilmg.cleanarchitecture.entrypoint.consumer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
