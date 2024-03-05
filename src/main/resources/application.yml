@@ -2,6 +2,9 @@ vinnilmg:
   client:
     address:
       url: http://localhost:8082/addresses
+  kafka:
+    host: localhost:9092
+    group: vinnilmg
 
 spring:
   data:
