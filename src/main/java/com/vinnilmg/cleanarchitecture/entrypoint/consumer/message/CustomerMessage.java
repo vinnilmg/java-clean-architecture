@@ -1,4 +1,4 @@
-package com.vinnilmg.cleanarchitecture.entrypoint.consumer;
+package com.vinnilmg.cleanarchitecture.entrypoint.consumer.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +12,5 @@ public class CustomerMessage {
     private String name;
     private String zipCode;
     private String cpf;
-    private Boolean isValidCpf;
+    private Boolean validCpf;
 }

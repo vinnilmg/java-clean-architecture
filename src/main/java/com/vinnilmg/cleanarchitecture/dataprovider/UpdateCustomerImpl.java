@@ -4,15 +4,17 @@ import com.vinnilmg.cleanarchitecture.core.dataprovider.UpdateCustomer;
 import com.vinnilmg.cleanarchitecture.core.domain.Customer;
 import com.vinnilmg.cleanarchitecture.dataprovider.repository.CustomerRepository;
 import com.vinnilmg.cleanarchitecture.dataprovider.repository.mapper.CustomerEntityMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class UpdateCustomerImpl implements UpdateCustomer {
 
-    private final CustomerRepository customerRepository;
-    private final CustomerEntityMapper customerEntityMapper;
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerEntityMapper customerEntityMapper;
 
     @Override
     public void update(Customer customer) {

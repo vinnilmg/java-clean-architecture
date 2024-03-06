@@ -1,6 +1,6 @@
 package com.vinnilmg.cleanarchitecture.config;
 
-import com.vinnilmg.cleanarchitecture.entrypoint.consumer.CustomerMessage;
+import com.vinnilmg.cleanarchitecture.entrypoint.consumer.message.CustomerMessage;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

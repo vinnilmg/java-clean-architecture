@@ -4,15 +4,19 @@ import com.vinnilmg.cleanarchitecture.core.dataprovider.FindAddressByZipCode;
 import com.vinnilmg.cleanarchitecture.core.domain.Address;
 import com.vinnilmg.cleanarchitecture.dataprovider.client.FindAddressByZipCodeClient;
 import com.vinnilmg.cleanarchitecture.dataprovider.client.mapper.AddressResponseMapper;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+@Slf4j
 @Component
 public class FindAddressByZipCodeImpl implements FindAddressByZipCode {
 
-    private final FindAddressByZipCodeClient findAddressByZipCodeClient;
-    private final AddressResponseMapper addressResponseMapper;
+    @Autowired
+    private FindAddressByZipCodeClient findAddressByZipCodeClient;
+
+    @Autowired
+    private AddressResponseMapper addressResponseMapper;
 
     @Override
     public Address find(String zipCode) {

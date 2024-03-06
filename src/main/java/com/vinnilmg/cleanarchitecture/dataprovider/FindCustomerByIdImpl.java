@@ -4,17 +4,19 @@ import com.vinnilmg.cleanarchitecture.core.dataprovider.FindCustomerById;
 import com.vinnilmg.cleanarchitecture.core.domain.Customer;
 import com.vinnilmg.cleanarchitecture.dataprovider.repository.CustomerRepository;
 import com.vinnilmg.cleanarchitecture.dataprovider.repository.mapper.CustomerEntityMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
 public class FindCustomerByIdImpl implements FindCustomerById {
 
-    private final CustomerRepository customerRepository;
-    private final CustomerEntityMapper customerEntityMapper;
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerEntityMapper customerEntityMapper;
 
     @Override
     public Optional<Customer> find(String id) {
